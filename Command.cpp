@@ -43,3 +43,8 @@ const GoCommand& Command::go() const
 {
 	return goComm;
 }
+
+void Command::print() const
+{
+	std::cout << "F: " << goComm.floor() << " T: " << callComm.time() << std::endl;
+}

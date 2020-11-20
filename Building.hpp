@@ -10,7 +10,8 @@ class Building
 	Elevator small;
 	WaitingPeople people;
 
-	Building(size_t largeCap, size_t smallCap);
+public:
+	Building(size_t largeCap = 0, size_t smallCap = 0, size_t floorCap = 0);
 
 };
 

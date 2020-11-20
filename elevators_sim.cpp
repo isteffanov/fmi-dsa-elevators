@@ -1,7 +1,10 @@
-#include <iostream>
+#include "Simulation.hpp"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    Simulation sim;
+    sim.begin();
+
+    return 0;
 }
 

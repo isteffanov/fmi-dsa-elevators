@@ -2,6 +2,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <queue>
+
+#include "Command.hpp"
 
 class FileManager
 {
@@ -21,18 +24,25 @@ class FileManager
 
 				meta = Meta(floors, large, small, commands);
 			}
+
+			return stream;
 		}
 	};
 
 	std::ifstream stream;
 	Meta meta;
 	
+	CallCommand getCall();
+	GoCommand getGo();
+	
 public:
 	FileManager(std::string file = "");
+
+	const std::queue<Command> commands();
 
 	size_t floors()	  const;
 	size_t large()	  const;
 	size_t small()	  const;
-	size_t commands() const;
+	size_t commands_num() const;
 };
 

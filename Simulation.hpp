@@ -7,7 +7,11 @@ class Simulation
 	FileManager manager;
 	Building building;
 
+	std::string file();
+	void init();
 public:
+	Simulation();
+
 	void begin();
 };
 

@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <string>
 
 struct CallCommand {
@@ -37,5 +38,6 @@ public:
 
 	const CallCommand& call() const;
 	const GoCommand&   go()   const;
+	void print() const;
 };
 

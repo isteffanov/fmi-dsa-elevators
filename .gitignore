@@ -3,6 +3,9 @@ Debug/
 *.vcxproj
 *.filters
 *.user
+*.rc
+*.aps
+
 
 # Prerequisites
 *.d
