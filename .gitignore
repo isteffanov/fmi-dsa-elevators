@@ -1,3 +1,9 @@
+#Visual Studio
+Debug/
+*.vcxproj
+*.filters
+*.user
+
 # Prerequisites
 *.d
 
