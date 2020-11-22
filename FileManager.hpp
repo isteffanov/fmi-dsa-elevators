@@ -4,7 +4,6 @@
 #include <string>
 #include <queue>
 
-#include "Command.hpp"
 #include "Request.hpp"
 
 class FileManager
@@ -44,6 +43,6 @@ public:
 	size_t floors()	  const;
 	size_t large()	  const;
 	size_t small()	  const;
-	size_t commands_num() const;
+	size_t numcomm() const;
 };
 

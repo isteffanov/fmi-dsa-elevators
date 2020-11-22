@@ -3,7 +3,7 @@
 Building::Building(size_t largeCap, size_t smallCap, size_t floorCap)
 	:large(largeCap, floorCap), small(smallCap, floorCap), people(floorCap) {}
 
-bool Building::interfere(const Command& c1, const Command& c2)
+bool Building::interfere(const Request& c1, const Request& c2)
 {
 	size_t time1 = c1.call().time();
 	size_t startFloor1 = c1.call().floor();
@@ -17,9 +17,22 @@ bool Building::interfere(const Command& c1, const Command& c2)
 	return true;
 }
 
-void Building::execute(const Command& command)
+void Building::execute(const std::list<Request>& sequence)
 {
-	command.print();
+	std::queue<Call> calls;
+	std::stack<Go> gos;
+	for (const Request& request : sequence) {
+		calls.push(request.call());
+		gos.push(request.go());
+	}
+
+	/* PASS TO CHOSEN ELEVATOR */
+	std::string dir = calls.front().dir();
+
+	while (!calls.empty()) {
+		calls.front().print();
+		std::cout << " D: " dir;
+	}
 }
 
 size_t Building::arrival(size_t time, size_t start, size_t dest)

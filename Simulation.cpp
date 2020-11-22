@@ -6,18 +6,20 @@ void Simulation::begin()
 {
 	init();
 
-	std::stack<Command> commandsStack;
-	std::queue<Command> commandsQueue = manager.commands();
-	while (!commandsQueue.empty()) {
-		do {
-			commandsStack.push(commandsQueue.front());
-			commandsQueue.pop();
-		} while (!commandsQueue.empty() && building.interfere(commandsStack.top(), commandsQueue.front()));
+	
+	std::queue<Request> requestQueue = manager.commands();
+	while (!requestQueue.empty()) {
 
-		while (!commandsStack.empty()) {
-			building.execute(commandsStack.top());
-			commandsStack.pop();
+		std::list<Request> sequence;
+		Request first = requestQueue.front();
+		requestQueue.pop();
+
+		while (!requestQueue.empty() && building.interfere(first, requestQueue.front())) {
+			sequence.push_back(requestQueue.front());
+			requestQueue.pop();
 		}
+
+		building.execute(sequence);
 	}
 }
 

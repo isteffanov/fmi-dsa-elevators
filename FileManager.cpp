@@ -34,17 +34,17 @@ Go FileManager::getGo()
 
 const std::queue<Request> FileManager::commands()
 {
-	std::queue<Request> commandsQueue;
+	std::queue<Request> requestQueue;
 	try {
 		for (int i = 0; i < meta.commandsNum; ++i) {
 			Call call = getCall();
 			Go go = getGo();
 
-			commandsQueue.push(Request(call, go));
+			requestQueue.push(Request(call, go));
 		}
 		stream.close();
 
-		return commandsQueue;
+		return requestQueue;
 	}
 	catch (...) {
 		throw;
@@ -66,7 +66,7 @@ size_t FileManager::small() const
 	return meta.smallCap;
 }
 
-size_t FileManager::commands_num() const
+size_t FileManager::numcomm() const
 {
 	return meta.commandsNum;
 }
