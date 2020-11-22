@@ -1,50 +1,53 @@
 #include "Command.hpp"
 
-CallCommand::CallCommand(std::string dir, size_t floor, size_t time)
-	:dirToGo(dir), floorCalled(floor), timeCalled(time){}
+Command::Command(size_t floor, size_t time)
+	:f_floor(floor), f_time(time) {}
 
-std::string CallCommand::dir() const
+/* CALL class */
+
+Call::Call(std::string dir, size_t floor, size_t time)
+	:f_dir(dir), Command(floor, time){}
+
+std::string Call::dir() const
 {
-	return dirToGo;
+	return f_dir;
 }
 
-size_t CallCommand::floor() const
+size_t Call::floor() const
 {
-	return floorCalled;
+	return f_floor;
 }
 
-size_t CallCommand::time() const
+size_t Call::time() const
 {
-	return timeCalled;
+	return f_time;
 }
 
-GoCommand::GoCommand(size_t floor, size_t time)
-	: floorToGo(floor), timeCalled(time){}
-
-size_t GoCommand::floor() const
+void Call::print() const
 {
-	return floorToGo;
+	std::cout << "Call D: " << dir << " F: " << floor << " T: " << time << std::endl;
 }
 
-size_t GoCommand::time() const
+/* GO class */
+
+Go::Go(size_t floor, size_t time)
+	: Command(floor, time){}
+
+size_t Go::floor() const
 {
-	return timeCalled;
+	return f_floor;
 }
 
-Command::Command(CallCommand call, GoCommand go)
-	:callComm(call), goComm(go){}
-
-const CallCommand& Command::call() const
+size_t Go::time() const
 {
-	return callComm;
+	return f_time;
 }
 
-const GoCommand& Command::go() const
+void Go::print() const
 {
-	return goComm;
+	std::cout << "Go F: " << floor << " T: " << time << std::endl;
 }
 
-void Command::print() const
-{
-	std::cout << "F: " << goComm.floor() << " T: " << callComm.time() << std::endl;
-}
+
+
+

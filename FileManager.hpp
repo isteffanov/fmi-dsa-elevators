@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <queue>
+#include <stack>
 
 #include "Command.hpp"
 

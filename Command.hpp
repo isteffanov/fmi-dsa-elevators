@@ -2,42 +2,46 @@
 #include <iostream>
 #include <string>
 
-struct CallCommand {
-private:
-	std::string dirToGo;
-	size_t floorCalled;
-	size_t timeCalled;
-
-public:
-	CallCommand(std::string dir = "", size_t floor = 0, size_t time = 0);
-
-	std::string dir() const;
-	size_t floor() const;
-	size_t time() const;
-};
-
-struct GoCommand {
-private:
-	size_t floorToGo;
-	size_t timeCalled;
-
-public:
-	GoCommand(size_t floor = 0, size_t time = 0);
-
-	size_t floor() const;
-	size_t time() const;
-};
-
 class Command
 {
-	CallCommand callComm;
-	GoCommand goComm;
+protected:
+	size_t f_floor;
+	size_t f_time;
 
 public:
-	Command(CallCommand call = CallCommand(), GoCommand go = GoCommand());
+	Command(size_t floor, size_t time);
+	virtual ~Command() {}
 
-	const CallCommand& call() const;
-	const GoCommand&   go()   const;
-	void print() const;
+	virtual size_t	floor() const = 0;
+	virtual size_t	time()  const = 0;
+	virtual void	print() const = 0;
+
 };
+
+class Call : public Command
+{
+	std::string f_dir;
+
+public:
+	Call(std::string dir, size_t floor, size_t time);
+
+	std::string dir() const;
+	virtual size_t	floor() const;
+	virtual size_t	time()  const;
+	virtual void	print() const;
+};
+
+class Go : public Command
+{
+
+public:
+	Go(size_t floor, size_t time);
+
+	virtual size_t	floor() const;
+	virtual size_t	time()  const;
+	virtual void	print() const;
+};
+
+
+
 

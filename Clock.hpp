@@ -1,4 +1,6 @@
 #pragma once
+#include "Command.hpp"
+
 class Clock
 {
 	size_t time;
