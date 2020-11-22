@@ -5,6 +5,7 @@
 #include <queue>
 
 #include "Command.hpp"
+#include "Request.hpp"
 
 class FileManager
 {
@@ -32,13 +33,13 @@ class FileManager
 	std::ifstream stream;
 	Meta meta;
 	
-	CallCommand getCall();
-	GoCommand getGo();
+	Call getCall();
+	Go getGo();
 	
 public:
 	FileManager(std::string file = "");
 
-	const std::queue<Command> commands();
+	const std::queue<Request> commands();
 
 	size_t floors()	  const;
 	size_t large()	  const;

@@ -1,50 +1,51 @@
 #include "Command.hpp"
 
-CallCommand::CallCommand(std::string dir, size_t floor, size_t time)
-	:dirToGo(dir), floorCalled(floor), timeCalled(time){}
+Command::Command(size_t floor, size_t time)
+	:f_floor(floor), f_time(time) {}
 
-std::string CallCommand::dir() const
+size_t Command::floor() const
 {
-	return dirToGo;
+	return f_floor;
 }
 
-size_t CallCommand::floor() const
+size_t Command::time() const
 {
-	return floorCalled;
-}
-
-size_t CallCommand::time() const
-{
-	return timeCalled;
-}
-
-GoCommand::GoCommand(size_t floor, size_t time)
-	: floorToGo(floor), timeCalled(time){}
-
-size_t GoCommand::floor() const
-{
-	return floorToGo;
-}
-
-size_t GoCommand::time() const
-{
-	return timeCalled;
-}
-
-Command::Command(CallCommand call, GoCommand go)
-	:callComm(call), goComm(go){}
-
-const CallCommand& Command::call() const
-{
-	return callComm;
-}
-
-const GoCommand& Command::go() const
-{
-	return goComm;
+	return f_time;
 }
 
 void Command::print() const
 {
-	std::cout << "F: " << goComm.floor() << " T: " << callComm.time() << std::endl;
+	std::cout << "F: " << f_floor << " T: " << f_time << std::endl;
 }
+
+/* CALL methods */
+
+Call::Call(std::string dir, size_t floor, size_t time)
+	:f_dir(dir), Command(floor, time){}
+
+std::string Call::dir() const
+{
+	return f_dir;
+}
+
+bool Call::intefere(const Call& other)
+{
+	size_t arrival = f_time + std::abs((int)f_floor - (int)other.f_floor);
+
+	if (f_dir != other.f_dir) return false;
+	if (arrival > other.f_time) return false;
+
+	return true;
+}
+
+/* GO methods*/
+
+Go::Go(size_t floor, size_t time)
+	: Command(floor, time) {}
+
+bool Go::intefere(const Go& other)
+{
+	return false;
+}
+
+
