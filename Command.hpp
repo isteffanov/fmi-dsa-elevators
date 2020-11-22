@@ -25,8 +25,8 @@ class Call : public Command
 public:
 	Call(std::string dir, size_t floor, size_t time);
 
-	std::string dir() const;
-	virtual size_t	floor() const;
+	std::string		dir() const;
+	virtual size_t	floor() const;	
 	virtual size_t	time()  const;
 	virtual void	print() const;
 };
