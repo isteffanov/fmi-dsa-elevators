@@ -1,4 +1,5 @@
 #pragma once
+#include <stack>
 #include "FileManager.hpp"
 #include "Building.hpp"
 

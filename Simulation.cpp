@@ -1,13 +1,23 @@
 #include "Simulation.hpp"
 
+Simulation::Simulation() {}
+
 void Simulation::begin()
 {
 	init();
 
+	std::stack<Command> commandsStack;
 	std::queue<Command> commandsQueue = manager.commands();
 	while (!commandsQueue.empty()) {
-		commandsQueue.front().print();
-		commandsQueue.pop();
+		do {
+			commandsStack.push(commandsQueue.front());
+			commandsQueue.pop();
+		} while (!commandsQueue.empty() && building.interfere(commandsStack.top(), commandsQueue.front()));
+
+		while (!commandsStack.empty()) {
+			building.execute(commandsStack.top());
+			commandsStack.pop();
+		}
 	}
 }
 
@@ -22,7 +32,6 @@ void Simulation::init()
 	building = Building(largeCap, smallCap, floorsNum);
 }
 
-Simulation::Simulation() {}
 
 std::string Simulation::file()
 {
