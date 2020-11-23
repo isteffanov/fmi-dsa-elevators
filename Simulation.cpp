@@ -11,15 +11,15 @@ void Simulation::begin()
 	}
 	
 
-	std::forward_list<Command> commandsList;
-	std::queue<Command> commandsQueue = manager.commands();
+	std::forward_list<Command*> commandsList;
+	CommandsContainer commands = manager.commands();
 
-	while (!commandsQueue.empty()) {
+	while (!commands.empty()) {
 
 		do {
-			commandsList.push(commandsQueue.front());
-			commandsQueue.pop();
-		} while (!commandsQueue.empty() && building.interfere(commandsList.front(), commandsQueue.front()));
+			commandsList.push_front(commands.front_ptr());
+			commands.pop();
+		} while (!commands.empty() && building.interfere(*(commandsList.front()), commands.front()));
 
 		building.execute(commandsList);
 	}

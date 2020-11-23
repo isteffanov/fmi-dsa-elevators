@@ -6,6 +6,7 @@
 #include <stack>
 
 #include "Command.hpp"
+#include "CommandsContainer.hpp"
 
 class FileManager
 {
@@ -33,13 +34,13 @@ class FileManager
 	std::ifstream stream;
 	Meta meta;
 	
-	CallCommand getCall();
-	GoCommand getGo();
+	Call getCall();
+	Go getGo();
 	
 public:
 	FileManager(std::string file = "");
 
-	const std::queue<Command> commands();
+	 const CommandsContainer commands();
 
 	size_t floors()	  const;
 	size_t large()	  const;

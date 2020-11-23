@@ -9,7 +9,7 @@ FileManager::FileManager(std::string file)
 	stream >> meta;
 }
 
-CallCommand FileManager::getCall()
+Call FileManager::getCall()
 {
 	std::string type, dir;
 	size_t floor, time;
@@ -18,9 +18,9 @@ CallCommand FileManager::getCall()
 	if (type == "go") throw std::exception("Invalid command type!");
 	else if (type != "call") throw std::exception("Invalid command!");
 	
-	else return CallCommand(dir, floor, time);
+	else return Call(dir, floor, time);
 }
-GoCommand FileManager::getGo()
+Go FileManager::getGo()
 {
 	std::string type;
 	size_t floor, time;
@@ -29,22 +29,23 @@ GoCommand FileManager::getGo()
 	if (type == "call") throw std::exception("Invalid command type!");
 	else if (type != "go") throw std::exception("Invalid command!");
 
-	else return GoCommand(floor, time);
+	else return Go(floor, time);
 }
 
-const std::queue<Command> FileManager::commands()
+const CommandsContainer FileManager::commands()
 {
-	std::queue<Command> commandsQueue;
+	CommandsContainer container;
 	try {
 		for (int i = 0; i < meta.commandsNum; ++i) {
-			CallCommand call = getCall();
-			GoCommand   go = getGo();
+			Call call = getCall();
+			Go   go = getGo();
 
-			commandsQueue.push(Command(call, go));
+			container.add(&call);
+			container.add(&go);
 		}
 		stream.close();
 
-		return commandsQueue;
+		return container;
 	}
 	catch (...) {
 		throw;

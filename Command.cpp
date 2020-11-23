@@ -1,12 +1,13 @@
 #include "Command.hpp"
 
-Command::Command(size_t floor, size_t time)
-	:f_floor(floor), f_time(time) {}
+Command::Command(std::string type, size_t floor, size_t time)
+	:f_type(type), f_floor(floor), f_time(time) {}
+
 
 /* CALL class */
 
 Call::Call(std::string dir, size_t floor, size_t time)
-	:f_dir(dir), Command(floor, time){}
+	:f_dir(dir), Command("CALL", floor, time){}
 
 std::string Call::dir() const
 {
@@ -31,7 +32,7 @@ void Call::print() const
 /* GO class */
 
 Go::Go(size_t floor, size_t time)
-	: Command(floor, time){}
+	: Command("GO", floor, time){}
 
 size_t Go::floor() const
 {
