@@ -1,9 +1,57 @@
 #include "Elevator.hpp"
 
-Elevator::Elevator(size_t pCap, size_t fCap)
-	:passengerCap(pCap), floorCap(fCap), curFloor(1), curPassengers(0){}
+Elevator::Elevator(char type, size_t pCap, size_t fCap)
+	:f_type(type), passengerCap(pCap), floorCap(fCap), curFloor(1), curPassengers(0){}
 
-void Elevator::execute(const Command& command)
+
+
+void Elevator::addRequests(std::list<Request>& other)
 {
-	std::cout << "opa";
+	for (Request& r : other)
+		allRequests.push_front(r);
 }
+
+size_t Elevator::floor() const
+{
+	return curFloor;
+}
+
+size_t Elevator::passengers() const
+{
+	return curPassengers;
+}
+
+std::list<Stop> Elevator::stops()
+{
+	std::list<Stop> stops;
+	
+
+
+	return stops;
+}
+
+void Elevator::addSorted(std::list<Stop> stops, const Request& toAdd) const
+{
+	Stop stop = Stop();
+	if(stops.empty()) stops.push_back()
+}
+
+const std::list<Request>& Elevator::requests() const
+{
+	return allRequests;
+}
+
+void Elevator::execute(const Request& request)
+{
+}
+
+size_t Elevator::time(size_t time, size_t floor)
+{
+	return time + 5*mod(floor - curFloor);
+}
+
+size_t Elevator::mod(int n)
+{
+	return (n >= 0 ? n : -n);
+}
+

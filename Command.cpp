@@ -13,9 +13,9 @@ size_t Command::time() const
 	return f_time;
 }
 
-void Command::print() const
+void Command::print(char elevator, std::string dir, size_t timeAdded) const
 {
-	std::cout  << "T: " << f_time << " F: " << f_floor << std::endl;
+	std::cout << "A: " << elevator << " D: " << dir  << " F: " << f_floor << " T: " << f_time + timeAdded<< std::endl;
 }
 
 /* CALL methods */

@@ -9,7 +9,7 @@ FileManager::FileManager(std::string file)
 	stream >> meta;
 }
 
-Call FileManager::getCall()
+const Call FileManager::getCall()
 {
 	std::string type, dir;
 	size_t floor, time;
@@ -20,7 +20,7 @@ Call FileManager::getCall()
 	
 	else return Call(dir, floor, time);
 }
-Go FileManager::getGo()
+const Go FileManager::getGo()
 {
 	std::string type;
 	size_t floor, time;

@@ -12,15 +12,17 @@ void Simulation::begin()
 
 		std::list<Request> sequence;
 		Request first = requestQueue.front();
-		requestQueue.pop();
+		//requestQueue.pop();
 
-		while (!requestQueue.empty() && building.interfere(first, requestQueue.front())) {
+		do {
 			sequence.push_back(requestQueue.front());
 			requestQueue.pop();
-		}
+		} while (!requestQueue.empty() && building.interfere(first, requestQueue.front()));
 
-		building.execute(sequence);
+		building.chooseElevator(sequence.front()).addRequests(sequence);
 	}
+
+	building.execute();
 }
 
 void Simulation::init()

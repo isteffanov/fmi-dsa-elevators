@@ -13,7 +13,7 @@ public:
 
 	size_t floor() const;
 	size_t time()  const;
-	void print() const;
+	void print(char elevator, std::string dir, size_t timeAdded = 0) const;
 };
 
 

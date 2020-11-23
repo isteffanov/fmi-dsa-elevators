@@ -1,5 +1,6 @@
 #pragma once
 #include <queue>
+#include <string>
 #include <list>
 #include "FileManager.hpp"
 #include "Building.hpp"

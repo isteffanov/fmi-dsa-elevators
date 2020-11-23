@@ -4,6 +4,7 @@
 #include <string>
 #include <queue>
 
+#include "Command.hpp"
 #include "Request.hpp"
 
 class FileManager
@@ -32,8 +33,8 @@ class FileManager
 	std::ifstream stream;
 	Meta meta;
 	
-	Call getCall();
-	Go getGo();
+	const Call getCall();
+	const Go getGo();
 	
 public:
 	FileManager(std::string file = "");
