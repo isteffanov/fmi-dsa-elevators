@@ -18,13 +18,11 @@ public:
 	void addRequests(std::list<Request>& other);
 
 	size_t floor()		const;
-	size_t passengers() const;
-	std::list<Stop> stops();
-	void addSorted(std::list<Stop> stops, const Request& toAdd) const;
+	size_t passengers() const;	
 	const std::list<Request>& requests() const;
+	
+	void setFloor(size_t floor);
 
-
-	void execute(const Request& request);
 	size_t time(size_t time, size_t floor);
 	size_t mod(int n);
 };

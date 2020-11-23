@@ -5,23 +5,25 @@ Building::Building(size_t largeCap, size_t smallCap, size_t floorCap)
 
 void Building::execute()
 {
-	std::list<Request> requestsLarge = large.requests();
-	std::list<Request> requestsSmall = small.requests();
+	std::string dir;
+	for (const Request& request : large.requests()) {
+		dir = (request.call().floor() - large.floor() >= 0 ? "UP" : "DOWN");
+		request.call().print('L', dir);
+		large.setFloor(request.call().floor());
 
-	for (const Request& requestLarge : requestsLarge) {
-		for (const Request& requestSmall : requestsSmall) {
-			
-			size_t floorCallLarge	= requestLarge.call().floor();
-			size_t timeCallLarge	= requestLarge.call().time();
-			size_t floorCallSmall	= requestSmall.call().floor();
-			size_t timeCallSmall	= requestSmall.call().time();
+		dir = (request.go().floor() - large.floor() >= 0 ? "UP" : "DOWN");
+		request.go().print('L', dir);
+		large.setFloor(request.go().floor());
+	}
 
-			if (large.time(timeCallLarge, floorCallLarge) < small.time(timeCallSmall, floorCallSmall))
-				small.execute(requestSmall);
+	for (const Request& request : small.requests()) {
+		dir = (request.call().floor() - small.floor() >= 0 ? "UP" : "DOWN");
+		request.call().print('S', dir);
+		large.setFloor(request.call().floor());
 
-			else large.execute(requestLarge);
-
-		}
+		dir = (request.go().floor() - small.floor() >= 0 ? "UP" : "DOWN");
+		request.go().print('S', dir);
+		large.setFloor(request.go().floor());
 	}
 }
 
@@ -33,7 +35,6 @@ bool Building::interfere(const Request& c1, const Request& c2)
 	size_t time2 = c2.call().time();
 	size_t startFloor2 = c2.call().floor();
 
-	//	TODO double check those statements
 	if (c1.call().dir() != c2.call().dir()) return false;
 	if (arrival(time1, startFloor1, startFloor2) > time2) return false;
 	

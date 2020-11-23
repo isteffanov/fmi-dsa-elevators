@@ -21,28 +21,14 @@ size_t Elevator::passengers() const
 	return curPassengers;
 }
 
-std::list<Stop> Elevator::stops()
-{
-	std::list<Stop> stops;
-	
-
-
-	return stops;
-}
-
-void Elevator::addSorted(std::list<Stop> stops, const Request& toAdd) const
-{
-	Stop stop = Stop();
-	if(stops.empty()) stops.push_back()
-}
-
 const std::list<Request>& Elevator::requests() const
 {
 	return allRequests;
 }
 
-void Elevator::execute(const Request& request)
+void Elevator::setFloor(size_t floor)
 {
+	curFloor = floor;
 }
 
 size_t Elevator::time(size_t time, size_t floor)

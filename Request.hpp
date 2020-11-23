@@ -15,19 +15,3 @@ public:
 	const Go& go() const;
 };
 
-class Stop 
-{
-	char f_elevator;
-	size_t f_time;
-	size_t f_floor;
-	std::string f_dir;
-
-public:
-	Stop(char elevator, size_t time, size_t floor, std::string dir);
-
-	const char&			elevator()	const;
-	const size_t&		time()		const;
-	const size_t&		floor()		const;
-	const std::string&	dir()		const;
-};
-
